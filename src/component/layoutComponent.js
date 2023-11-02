@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "style/layoutComponent.module.css";
  
-const layoutComponent = () => {
+const LayoutComponent = () => {
   return (
     <>
       <div className={styles.container}>
@@ -58,4 +58,4 @@ const layoutComponent = () => {
   );
 };
 
-export default layoutComponent;
+export default LayoutComponent;
