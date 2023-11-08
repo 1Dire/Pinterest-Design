@@ -8,6 +8,11 @@
   width: 100%;
   margin-bottom: 10px;
   break-inside: avoid;
+  transition: 2s;
+  opacity: 0;
+}
+.container .box.show{
+  opacity: 1;
 }
 .container .box img {
   max-width: 100%;
