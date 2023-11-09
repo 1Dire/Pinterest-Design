@@ -68,16 +68,20 @@ const LayoutComponent = () => {
   }, [images]);
 
   return (
-    <div className={styles.container}>
+    <>
+     <div className={styles.container}>
       {images.map((image, index) => (
         <div className={styles.box} key={index} id={`image-${index + 1}`}>
           <img
-            src={`${process.env.PUBLIC_URL}/images/${image.src}`}
+            src={`${process.env.PUBLIC_URL}/images/${image.src}`} 
             alt={image.alt}
           />
         </div>
       ))}
     </div>
+
+    </>
+   
   );
 };
 
