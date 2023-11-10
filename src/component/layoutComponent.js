@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styles from "style/layoutComponent.module.css";
-
+import {useDispatch } from "react-redux"
+import { changeWindow } from "store";
 const LayoutComponent = () => {
   const [images, setImages] = useState([]);
-
+  let dispatch = useDispatch()
+  const popOpen =  (data) =>{
+    dispatch(changeWindow(data))
+  
+  }
   useEffect(() => {
     const fetchImages = async () => {
       try {
@@ -16,7 +21,6 @@ const LayoutComponent = () => {
             alt: `img${num}`,
           });
         }
-
         setImages(response);
       } catch (error) {
         console.error("Error fetching images:", error);
@@ -40,9 +44,12 @@ const LayoutComponent = () => {
     const lastCardObserver = new IntersectionObserver(entries =>{
      const lastCard = entries[0]
      lastCard.target.classList.toggle(styles.show, lastCard.isIntersecting);
-     if(!lastCard.isIntersecting) return
-     loadNewCards()
-     lastCardObserver.observe(document.getElementById(`image-${images.length}`))
+     if(!lastCard.isIntersecting) {
+      return
+     }else{
+      loadNewCards()
+     }
+     
     },{})
 
 
@@ -71,7 +78,7 @@ const LayoutComponent = () => {
     <>
      <div className={styles.container}>
       {images.map((image, index) => (
-        <div className={styles.box} key={index} id={`image-${index + 1}`}>
+        <div className={styles.box} key={index} id={`image-${index + 1}`} onClick={() => popOpen(image)}>
           <img
             src={`${process.env.PUBLIC_URL}/images/${image.src}`} 
             alt={image.alt}
@@ -79,7 +86,7 @@ const LayoutComponent = () => {
         </div>
       ))}
     </div>
-
+    <div></div>
     </>
    
   );
