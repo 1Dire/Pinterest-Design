@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styles from "style/layoutComponent.module.css";
-import {useDispatch } from "react-redux"
+import { useDispatch } from "react-redux";
 import { changeWindow } from "store";
 const LayoutComponent = () => {
   const [images, setImages] = useState([]);
-  let dispatch = useDispatch()
-  const popOpen =  (data) =>{
-    dispatch(changeWindow(data))
-  
-  }
+  let dispatch = useDispatch();
+  const popOpen = (data) => {
+    dispatch(changeWindow(data));
+  };
   useEffect(() => {
     const fetchImages = async () => {
       try {
@@ -41,22 +40,21 @@ const LayoutComponent = () => {
         { threshold: 1, rootMargin: "0" }
       );
     });
-    const lastCardObserver = new IntersectionObserver(entries =>{
-     const lastCard = entries[0]
-     lastCard.target.classList.toggle(styles.show, lastCard.isIntersecting);
-     if(!lastCard.isIntersecting) {
-      return
-     }else{
-      loadNewCards()
-     }
-     
-    },{})
+    const lastCardObserver = new IntersectionObserver((entries) => {
+      const lastCard = entries[0];
+      lastCard.target.classList.toggle(styles.show, lastCard.isIntersecting);
+      if (!lastCard.isIntersecting) {
+        return;
+      } else {
+        loadNewCards();
+      }
+    }, {});
 
-
-    function loadNewCards (){//
+    function loadNewCards() {
+      //
       //마지막카드
-      console.log('last')
-    } 
+      console.log("last");
+    }
     const lastCardElement = document.getElementById(`image-${images.length}`);
     if (lastCardElement) {
       lastCardObserver.observe(lastCardElement);
@@ -66,7 +64,6 @@ const LayoutComponent = () => {
       if (imageRef) {
         observer.observe(imageRef);
       }
-      
     });
 
     return () => {
@@ -76,19 +73,23 @@ const LayoutComponent = () => {
 
   return (
     <>
-     <div className={styles.container}>
-      {images.map((image, index) => (
-        <div className={styles.box} key={index} id={`image-${index + 1}`} onClick={() => popOpen(image)}>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/${image.src}`} 
-            alt={image.alt}
-          />
-        </div>
-      ))}
-    </div>
-    <div></div>
+      <div className={styles.container}>
+        {images.map((image, index) => (
+          <div
+            className={styles.box}
+            key={index}
+            id={`image-${index + 1}`}
+            onClick={() => popOpen(image)}
+          >
+            <img
+              src={`${process.env.PUBLIC_URL}/images/${image.src}`}
+              alt={image.alt}
+            />
+          </div>
+        ))}
+      </div>
+      <div></div>
     </>
-   
   );
 };
 
