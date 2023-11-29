@@ -12,10 +12,10 @@ const CenteredComponent = () => {
       <div className={styles.dim} onClick={() => dispatch(changeWindow(null))}>
         <div className={styles.window} onClick={(e) => e.stopPropagation()}>
           <div className={styles.closeButtonWrapper}>
-            <CloseButton
-              className={`${styles.closeButton}`}
-              onClick={() => dispatch(changeWindow(null))}
-            />
+              <CloseButton
+                className={`${styles.closeButton}`}
+                onClick={() => dispatch(changeWindow(null))}
+              />
           </div>
 
           <div className={styles.content}>

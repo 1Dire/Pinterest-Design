@@ -19,8 +19,10 @@
 }
 .closeButton{
     position: absolute;
-    right: 0;
+    right: -50px;
     outline: 0;
+    
+  
 }
 /* contentComponent.module.css */
 
